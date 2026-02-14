@@ -1,0 +1,108 @@
+{
+  "name": "runpod-extension",
+  "displayName": "RunPod Extension",
+  "description": "RunPod VS Code extension for pod connect and lifecycle commands",
+  "version": "0.0.1",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:runpod.setApiKey",
+    "onCommand:runpod.connectPod",
+    "onCommand:runpod.createPod",
+    "onCommand:runpod.stopPod",
+    "onCommand:runpod.terminatePod"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "runpod.setApiKey",
+        "title": "RunPod: Set API Key..."
+      },
+      {
+        "command": "runpod.connectPod",
+        "title": "RunPod: Connect Pod..."
+      },
+      {
+        "command": "runpod.createPod",
+        "title": "RunPod: Create Pod..."
+      },
+      {
+        "command": "runpod.stopPod",
+        "title": "RunPod: Stop Pod..."
+      },
+      {
+        "command": "runpod.terminatePod",
+        "title": "RunPod: Terminate Pod..."
+      }
+    ],
+    "configuration": {
+      "title": "RunPod",
+      "properties": {
+        "runpod.sshAliasPrefix": {
+          "type": "string",
+          "default": "runpod-",
+          "description": "SSH alias prefix for generated host entries."
+        },
+        "runpod.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "RunPod API key fallback (plain text). Prefer using 'RunPod: Set API Key...' which stores it in VS Code SecretStorage."
+        },
+        "runpod.apiBase": {
+          "type": "string",
+          "default": "https://rest.runpod.io/v1",
+          "description": "RunPod REST API base URL."
+        },
+        "runpod.sshUser": {
+          "type": "string",
+          "default": "root",
+          "description": "SSH user used for pod connection."
+        },
+        "runpod.remotePath": {
+          "type": "string",
+          "default": "/workspace",
+          "description": "Remote path opened after pod connection."
+        },
+        "runpod.pollIntervalMs": {
+          "type": "number",
+          "default": 3000,
+          "minimum": 500,
+          "description": "Polling interval while waiting for pod SSH readiness."
+        },
+        "runpod.pollTimeoutMs": {
+          "type": "number",
+          "default": 600000,
+          "minimum": 5000,
+          "description": "Polling timeout while waiting for pod SSH readiness."
+        },
+        "runpod.autoStartStoppedPod": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically call start API when a stopped pod is selected."
+        },
+        "runpod.createPodRequestJson": {
+          "type": "string",
+          "default": "",
+          "description": "JSON body used by 'RunPod: Create Pod...' command."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "@types/vscode": "^1.95.0",
+    "typescript": "^5.4.5"
+  }
+}
