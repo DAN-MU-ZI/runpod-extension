@@ -11,12 +11,9 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:runpod.setApiKey",
-    "onCommand:runpod.connectPod",
-    "onCommand:runpod.createPod",
-    "onCommand:runpod.stopPod",
-    "onCommand:runpod.terminatePod"
+  "extensionDependencies": [
+    "ms-vscode-remote.remote-ssh",
+    "ms-toolsai.jupyter"
   ],
   "main": "./out/extension.js",
   "contributes": {
